@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienestar Emocional en el Deporte</title>
+  <!-- Tipografía moderna de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Elementos decorativos sutiles de fondo con temática deportiva -->
+  <div class="bg-decoration" aria-hidden="true">
+    <svg class="sport-shape shape-1" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2" />
+      <path d="M18 22C34 38 34 62 18 78M82 22C66 38 66 62 82 78M50 4V96M4 50H96" stroke="currentColor" stroke-width="2" />
+    </svg>
+    <svg class="sport-shape shape-2" viewBox="0 0 120 120" fill="none">
+      <path d="M15 95C35 45 75 25 105 25M25 105C45 55 85 35 115 35M5 85C25 35 65 15 95 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+
+  <main class="app-container">
+    <!-- ==================== PANTALLA 1: INICIO ==================== -->
+    <section id="screen-start" class="card screen active" aria-labelledby="main-title">
+      <div class="badge-sport">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        <span>Salud &amp; Rendimiento</span>
+      </div>
+
+      <h1 id="main-title" class="title">¿Cómo es tu relación con el deporte?</h1>
+      <p class="subtitle">Conocé cómo te sentís emocionalmente mientras practicás deporte</p>
+
+      <div class="intro-box">
+        <p>
+          Este breve cuestionario de <strong>10 preguntas</strong> está pensado para ayudarte a reflexionar sobre tus emociones, presiones y experiencias al entrenar o competir.
+        </p>
+        <p class="intro-highlight">
+          No hay respuestas correctas o incorrectas: respondé con total sinceridad según cómo te sentís habitualmente.
+        </p>
+      </div>
+
+      <button id="btn-start" type="button" class="btn btn-primary btn-large">
+        <span>Comenzar cuestionario</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </section>
+
+    <!-- ==================== PANTALLA 2: CUESTIONARIO ==================== -->
+    <section id="screen-quiz" class="card screen hidden" aria-live="polite">
+      <!-- Cabecera de progreso -->
+      <header class="quiz-header">
+        <div class="progress-info">
+          <span id="question-counter" class="counter-text">Pregunta 1 de 10</span>
+          <span id="progress-percent" class="percent-text">0% completado</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-container">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </header>
+
+      <!-- Contenedor animado de pregunta -->
+      <div id="question-wrapper" class="question-wrapper">
+        <div class="question-number-pill" id="question-pill">#01</div>
+        <h2 id="question-text" class="question-text">
+          ¿Disfrutás de practicar tu deporte, aunque no ganes?
+        </h2>
+
+        <!-- Opciones Sí / No -->
+        <div class="options-grid" role="radiogroup" aria-labelledby="question-text">
+          <button type="button" class="option-btn" data-value="si" id="btn-yes">
+            <span class="option-indicator"></span>
+            <span class="option-label">Sí</span>
+          </button>
+
+          <button type="button" class="option-btn" data-value="no" id="btn-no">
+            <span class="option-indicator"></span>
+            <span class="option-label">No</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Controles de navegación -->
+      <footer class="quiz-footer">
+        <button id="btn-prev" type="button" class="btn btn-ghost" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Anterior</span>
+        </button>
+
+        <button id="btn-next" type="button" class="btn btn-primary" disabled>
+          <span id="btn-next-text">Siguiente</span>
+          <svg id="btn-next-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </footer>
+    </section>
+
+    <!-- ==================== PANTALLA 3: RESULTADOS ==================== -->
+    <section id="screen-result" class="card screen hidden" aria-live="polite">
+      <div id="result-banner" class="result-banner">
+        <span id="result-emoji" class="result-emoji" aria-hidden="true">🟢</span>
+        <span class="result-tag">Tu resultado</span>
+        <h2 id="result-title" class="result-title">BIENESTAR EMOCIONAL</h2>
+      </div>
+
+      <div class="result-body">
+        <p id="result-message" class="result-message">
+          "Tenés una relación saludable con el deporte."
+        </p>
+
+        <div id="advice-box" class="advice-box">
+          <div class="advice-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+              <path d="M12 16v-4"></path>
+              <path d="M12 8h.01"></path>
+            </svg>
+            <span>Consejo para vos</span>
+          </div>
+          <p id="result-advice" class="result-advice"></p>
+        </div>
+      </div>
+
+      <button id="btn-restart" type="button" class="btn btn-secondary btn-large">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+        <span>Volver a realizar el cuestionario</span>
+      </button>
+
+      <p class="disclaimer">
+        Este cuestionario es orientativo y busca promover la reflexión sobre el bienestar emocional en el deporte. No constituye un diagnóstico psicológico.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

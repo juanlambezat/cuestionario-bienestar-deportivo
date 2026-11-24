@@ -1,0 +1,554 @@
+/* ==========================================================================
+   Variables de diseño y paleta de colores (Blanco, Verde y Neutros)
+   ========================================================================== */
+:root {
+  --bg-page: #f3f7f4;
+  --bg-card: #ffffff;
+  --bg-subtle: #f8faf9;
+
+  --green-primary: #15803d;
+  --green-hover: #166534;
+  --green-light: #dcfce7;
+  --green-soft: #ecfdf5;
+  --green-border: #86efac;
+
+  --text-main: #18221d;
+  --text-secondary: #4b5b53;
+  --text-muted: #6e7f76;
+
+  --border-neutral: #dce5df;
+  --shadow-card: 0 16px 40px -12px rgba(20, 50, 35, 0.1);
+  --shadow-btn: 0 8px 20px -6px rgba(21, 128, 61, 0.35);
+
+  /* Colores dinámicos para los 4 niveles de resultado */
+  --level-green-bg: #ecfdf5;
+  --level-green-border: #6ee7b7;
+  --level-green-text: #065f46;
+
+  --level-yellow-bg: #fefce8;
+  --level-yellow-border: #fde047;
+  --level-yellow-text: #854d0e;
+
+  --level-orange-bg: #fff7ed;
+  --level-orange-border: #fdba74;
+  --level-orange-text: #9a3412;
+
+  --level-red-bg: #fef2f2;
+  --level-red-border: #fca5a5;
+  --level-red-text: #991b1b;
+
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --transition: 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Reseteo y estilos base
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top right, #e3f3e8 0%, var(--bg-page) 55%, #eef3f0 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Decoración deportiva sutil de fondo */
+.bg-decoration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sport-shape {
+  position: absolute;
+  color: var(--green-primary);
+  opacity: 0.06;
+}
+
+.shape-1 {
+  width: 340px;
+  height: 340px;
+  top: -80px;
+  right: -70px;
+}
+
+.shape-2 {
+  width: 380px;
+  height: 380px;
+  bottom: -100px;
+  left: -80px;
+}
+
+/* ==========================================================================
+   Contenedor principal y tarjetas
+   ========================================================================== */
+.app-container {
+  width: 100%;
+  max-width: 620px;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid rgba(220, 229, 223, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  box-shadow: var(--shadow-card);
+}
+
+.screen.hidden {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+  animation: screenFadeIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes screenFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Pantalla 1: Inicio
+   ========================================================================== */
+.badge-sport {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-soft);
+  color: var(--green-primary);
+  border: 1px solid var(--green-light);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--green-primary);
+  margin-bottom: 24px;
+}
+
+.intro-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-neutral);
+  border-left: 4px solid var(--green-primary);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  margin-bottom: 30px;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+}
+
+.intro-box p + p {
+  margin-top: 10px;
+}
+
+.intro-highlight {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Botones generales
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-large {
+  width: 100%;
+  padding: 16px 28px;
+  font-size: 1.05rem;
+}
+
+.btn-primary {
+  background: var(--green-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-btn);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--green-hover);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--green-soft);
+  color: var(--green-primary);
+  border: 1.5px solid var(--green-border);
+}
+
+.btn-secondary:hover {
+  background: var(--green-light);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-neutral);
+  padding: 12px 18px;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: #b8c7be;
+}
+
+/* ==========================================================================
+   Pantalla 2: Cuestionario y Barra de Progreso
+   ========================================================================== */
+.quiz-header {
+  margin-bottom: 28px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.counter-text {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.percent-text {
+  font-weight: 600;
+  color: var(--green-primary);
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #e6ede9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #22c55e, var(--green-primary));
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+/* Animación al cambiar de pregunta */
+.question-wrapper {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.question-wrapper.slide-in {
+  animation: questionSlide 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes questionSlide {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.question-number-pill {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-neutral);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+
+.question-text {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 28px;
+}
+
+/* Botones de respuesta Sí / No */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--bg-subtle);
+  border: 2px solid var(--border-neutral);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+  border-color: var(--green-primary);
+  background: #f4fbf6;
+  transform: translateY(-2px);
+}
+
+.option-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #9eb0a6;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Estado seleccionado */
+.option-btn.selected {
+  background: var(--green-soft);
+  border-color: var(--green-primary);
+  color: var(--green-primary);
+  box-shadow: 0 6px 16px -4px rgba(21, 128, 61, 0.2);
+}
+
+.option-btn.selected .option-indicator {
+  border-color: var(--green-primary);
+  background: var(--green-primary);
+}
+
+.option-btn.selected .option-indicator::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Pie de navegación */
+.quiz-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-neutral);
+}
+
+/* ==========================================================================
+   Pantalla 3: Resultados personalizados
+   ========================================================================== */
+.result-banner {
+  text-align: center;
+  padding: 28px 20px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--level-green-border);
+  background: var(--level-green-bg);
+  color: var(--level-green-text);
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.result-emoji {
+  display: block;
+  font-size: 2.75rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.result-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.result-title {
+  font-size: clamp(1.35rem, 3.5vw, 1.7rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Variantes visuales según puntaje */
+.result-banner.level-green {
+  background: var(--level-green-bg);
+  border-color: var(--level-green-border);
+  color: var(--level-green-text);
+}
+
+.result-banner.level-yellow {
+  background: var(--level-yellow-bg);
+  border-color: var(--level-yellow-border);
+  color: var(--level-yellow-text);
+}
+
+.result-banner.level-orange {
+  background: var(--level-orange-bg);
+  border-color: var(--level-orange-border);
+  color: var(--level-orange-text);
+}
+
+.result-banner.level-red {
+  background: var(--level-red-bg);
+  border-color: var(--level-red-border);
+  color: var(--level-red-text);
+}
+
+.result-body {
+  margin-bottom: 28px;
+}
+
+.result-message {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.advice-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-neutral);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+}
+
+.advice-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.result-advice {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.disclaimer {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   Adaptabilidad Mobile (Responsive)
+   ========================================================================== */
+@media (max-width: 520px) {
+  body {
+    padding: 14px;
+  }
+
+  .card {
+    padding: 28px 20px;
+    border-radius: 20px;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-footer {
+    flex-direction: row;
+  }
+
+  .quiz-footer .btn {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+}
